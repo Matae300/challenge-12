@@ -4,7 +4,7 @@ const inquirer = require('inquirer');
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '',
+  password: 'March2002!',
   database: 'busniess_db',
 });
 
@@ -92,26 +92,26 @@ inquirer.prompt([
           },
           {
             type: 'input',
-            name: 'department',
-            message: 'Enter department name:',
+            name: 'departmentId',
+            message: 'Enter department id:',
           },
           {
             type: 'input',
             name: 'salary',
-            message: 'add salary',
+            message: 'Enter salary:',
           },
         ])
         .then((answers) => {
-          const { title, department, salary } = answers;
+          const { title, departmentId, salary } = answers;
           connection.query(
-            'INSERT INTO roles (title, department, salary) VALUES (?, ?, ?)',
-            [title, department, salary],
+            'INSERT INTO roles (title, department_id, salary) VALUES (?, ?, ?)',
+            [title, departmentId, salary],
             (err, result) => {
               if (err) {
-                console.error('Error adding employee:', err);
+                console.error('Error adding role:', err);
                 return;
               }
-              console.log('Employee added successfully!');
+              console.log('Role added successfully!');
               connection.end();
             }
           );
